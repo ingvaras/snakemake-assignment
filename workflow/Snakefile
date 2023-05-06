@@ -70,21 +70,66 @@ rule multiqc_trimmed:
 
 all_samples = ["sample1", "sample2", "sample3"]
 
-rule star_align:
+rule genome_index:
     input:
-        r1 = expand("data/samples/{sample}_R1_001.fastq", sample=all_samples_for_alignment),
-        r2 = expand("data/samples/{sample}_R2_001.fastq", sample=all_samples_for_alignment),
-        all_samples=all_samples_for_alignment
+        ref="data/chr19_20Mb.fa",
+        ann="data/chr19_20Mb.gtf"
     output:
-        expand("results/aligned/{sample}.bam", sample=all_samples_for_alignment)
+        directory("results/genome_index")
     shell:
         """
-        for sample in {input.all_samples}; do
+        STAR \
+            --runThreadN 4 \
+            --runMode genomeGenerate \
+            --genomeDir {output} \
+            --genomeFastaFiles {input.ref} \
+            --sjdbGTFfile {input.ann}
+        """
+
+
+rule star_align:
+    input:
+        r1 = expand("results/data/samples/{sample}_R1_001.fastq", sample=all_samples_for_alignment),
+        r2 = expand("results/data/samples/{sample}_R2_001.fastq", sample=all_samples_for_alignment),
+	genome_index=directory("results/genome_index")
+    output:
+        bam=expand("results/aligned/{sample}.bamAligned.sortedByCoord.out.bam", sample=all_samples_for_alignment)
+    params:
+        all_smpls = all_samples_for_alignment
+    shell:
+        """
+        r1Extension="_R1_001.fastq"
+        r2Extension="_R2_001.fastq"
+        for sample in {params.all_smpls}; do
             STAR \
-            --readFilesIn data/samples/$sample_R1_001.fastq data/samples/$sample_R2_001.fastq \
-            --outFileNamePrefix results/aligned/${sample}.bam \
+            --genomeDir results/genome_index \
+            --readFilesIn results/data/samples/$sample$r1Extension results/data/samples/$sample$r2Extension \
+            --outFileNamePrefix results/aligned/$sample.bam \
             --outSAMtype BAM SortedByCoordinate \
             --runThreadN 4;
         done
+        samtools index {output.bam}
         """
 
+rule featureCounts:
+    input:
+        bam=expand("results/aligned/{sample}.bamAligned.sortedByCoord.out.bam", sample=all_samples_for_alignment),
+        ann="data/chr19_20Mb.gtf"
+    output:
+        counts=expand("results/counts/{sample}.txt", sample=all_samples_for_alignment)
+    params:
+        all_smpls = all_samples_for_alignment
+    shell:
+        """
+        for sample in {params.all_smpls}; do
+            samtools sort -n -o results/aligned/$sample.bamAligned.sortedByCoord.out.bam.sorted.bam results/aligned/$sample.bamAligned.sortedByCoord.out.bam
+            featureCounts \
+            -p \
+            -t exon \
+            -g gene_id \
+            -a {input.ann} \
+            -o results/counts/$sample.txt \
+            -s 1 \
+            results/aligned/$sample.bamAligned.sortedByCoord.out.bam.sorted.bam;
+        done
+        """
