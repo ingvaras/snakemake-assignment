@@ -1,0 +1,145 @@
+STAR version=2.7.10b
+STAR compilation time,server,dir= :/Users/distiller/project/STARcompile/source
+STAR git: On branch master ; commit c6f8efc2c7043ef83bf8b0d9bed36bbb6b9b1133 ; diff files: 
+##### Command Line:
+STAR --genomeDir results/genome_index --readFilesIn results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R1_001.fastq results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R2_001.fastq --outFileNamePrefix results/aligned/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001.bam --outSAMtype BAM SortedByCoordinate --runThreadN 4
+##### Initial USER parameters from Command Line:
+outFileNamePrefix                 results/aligned/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001.bam
+###### All USER parameters from Command Line:
+genomeDir                     results/genome_index     ~RE-DEFINED
+readFilesIn                   results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R1_001.fastq   results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R2_001.fastq        ~RE-DEFINED
+outFileNamePrefix             results/aligned/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001.bam     ~RE-DEFINED
+outSAMtype                    BAM   SortedByCoordinate        ~RE-DEFINED
+runThreadN                    4     ~RE-DEFINED
+##### Finished reading parameters from all sources
+
+##### Final user re-defined parameters-----------------:
+runThreadN                        4
+genomeDir                         results/genome_index
+readFilesIn                       results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R1_001.fastq   results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R2_001.fastq   
+outFileNamePrefix                 results/aligned/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001.bam
+outSAMtype                        BAM   SortedByCoordinate   
+
+-------------------------------
+##### Final effective command line:
+STAR   --runThreadN 4   --genomeDir results/genome_index   --readFilesIn results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R1_001.fastq   results/data/samples/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001_R2_001.fastq      --outFileNamePrefix results/aligned/Collibri_standard_protocol-HBR-Collibri-100_ng-3_S2_L001.bam   --outSAMtype BAM   SortedByCoordinate   
+----------------------------------------
+
+Number of fastq files for each mate = 1
+ParametersSolo: --soloCellFilterType CellRanger2.2 filtering parameters:  3000 0.99 10
+WARNING: --limitBAMsortRAM=0, will use genome size as RAM limit for BAM sorting
+Finished loading and checking parameters
+Reading genome generation parameters:
+### STAR   --runMode genomeGenerate      --runThreadN 4   --genomeDir results/genome_index   --genomeFastaFiles data/chr19_20Mb.fa      --sjdbGTFfile data/chr19_20Mb.gtf
+### GstrandBit=32
+versionGenome                 2.7.4a     ~RE-DEFINED
+genomeType                    Full     ~RE-DEFINED
+genomeFastaFiles              data/chr19_20Mb.fa        ~RE-DEFINED
+genomeSAindexNbases           14     ~RE-DEFINED
+genomeChrBinNbits             18     ~RE-DEFINED
+genomeSAsparseD               1     ~RE-DEFINED
+genomeTransformType           None     ~RE-DEFINED
+genomeTransformVCF            -     ~RE-DEFINED
+sjdbOverhang                  100     ~RE-DEFINED
+sjdbFileChrStartEnd           -        ~RE-DEFINED
+sjdbGTFfile                   data/chr19_20Mb.gtf     ~RE-DEFINED
+sjdbGTFchrPrefix              -     ~RE-DEFINED
+sjdbGTFfeatureExon            exon     ~RE-DEFINED
+sjdbGTFtagExonParentTranscripttranscript_id     ~RE-DEFINED
+sjdbGTFtagExonParentGene      gene_id     ~RE-DEFINED
+sjdbInsertSave                Basic     ~RE-DEFINED
+genomeFileSizes               20385083   165321753        ~RE-DEFINED
+Genome version is compatible with current STAR
+Number of real (reference) chromosomes= 1
+1	chr19	19999999	0
+--sjdbOverhang = 100 taken from the generated genome
+Started loading the genome: Tue May  2 14:03:56 2023
+
+Genome: size given as a parameter = 20385083
+SA: size given as a parameter = 165321753
+SAindex: size given as a parameter = 1
+Read from SAindex: pGe.gSAindexNbases=14  nSAi=357913940
+nGenome=20385083;  nSAbyte=165321753
+GstrandBit=32   SA number of indices=40078000
+Shared memory is not used for genomes. Allocated a private copy of the genome.
+Genome file size: 20385083 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading Genome ... done! state: good=1 eof=0 fail=0 bad=0; loaded 20385083 bytes
+SA file size: 165321753 bytes; state: good=1 eof=0 fail=0 bad=0
+Loading SA ... done! state: good=1 eof=0 fail=0 bad=0; loaded 165321753 bytes
+Loading SAindex ... done: 1565873619 bytes
+Finished loading the genome: Tue May  2 14:03:56 2023
+
+Sum of all Genome bytes: 31626061
+Sum of all SA bytes: 15931218307
+Sum of all SAi bytes: 152709204604
+Processing splice junctions database sjdbN=995,   pGe.sjdbOverhang=100 
+alignIntronMax=alignMatesGapMax=0, the max intron size will be approximately determined by (2^winBinNbits)*winAnchorDistNbins=589824
+Created thread # 1
+Created thread # 2
+Created thread # 3
+Thread #3 end of input stream, nextChar=-1
+Completed: thread #0
+BAM sorting: 1692 mapped reads
+BAM sorting bins genomic start loci:
+1	0	417147
+2	0	520989
+3	0	577952
+4	0	580406
+5	0	581343
+6	0	582847
+7	0	603658
+8	0	621840
+9	0	648897
+10	0	721920
+11	0	736053
+12	0	746801
+13	0	747858
+14	0	813372
+15	0	885818
+16	0	992079
+17	0	1020773
+18	0	1088187
+19	0	1105193
+20	0	1105660
+21	0	1206608
+22	0	1227897
+23	0	1243195
+24	0	1257499
+25	0	1271209
+26	0	1272630
+27	0	1274020
+28	0	1362943
+29	0	1378154
+30	0	1395457
+31	0	1415510
+32	0	1438871
+33	0	1440344
+34	0	1453477
+35	0	1460275
+36	0	1466048
+37	0	1469494
+38	0	1471328
+39	0	1472799
+40	0	1508760
+41	0	1577942
+42	0	1591608
+43	0	1599961
+44	0	1823830
+45	0	1877250
+46	0	1923165
+47	0	1969762
+48	0	1985814
+Completed: thread #3
+Completed: thread #1
+Joined thread # 1
+Completed: thread #2
+Joined thread # 2
+Joined thread # 3
+May 02 14:04:03 ..... finished mapping
+RAM after mapping:
+
+RAM after freeing genome index memory:
+
+May 02 14:04:03 ..... started sorting BAM
+Max memory needed for sorting = 593951
+ALL DONE!
